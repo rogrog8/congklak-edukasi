@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowchart - Congklak Elektronik</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 flex justify-center items-start min-h-screen">
+
+    <div class="w-full max-w-2xl bg-white p-8 rounded-lg shadow-lg mt-10 text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Flowchart Alur Pembelajaran</h1>
+        
+        <!-- Representasi Flowchart dengan HTML/Tailwind -->
+        <div class="space-y-2 text-left text-sm md:text-base">
+            <div class="bg-blue-100 border border-blue-400 p-3 rounded-lg shadow"><strong>Mulai:</strong> Guru membuka aplikasi.</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-blue-100 border border-blue-400 p-3 rounded-lg shadow"><strong>Pengenalan Aturan & Nilai:</strong> Anak mengucapkan "Janji Bermain".</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-green-100 border border-green-400 p-3 rounded-lg shadow"><strong>Giliran Bermain Dimulai:</strong> Pemain 1 mengklik lubang.</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-yellow-100 border border-yellow-400 p-3 rounded-lg shadow"><strong>Kartu Giliran Muncul:</strong> Sistem menampilkan pertanyaan (Disiplin/Jujur).</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-yellow-100 border border-yellow-400 p-3 rounded-lg shadow"><strong>Respon Anak:</strong> Anak menjawab kartu dan mendapat poin (💖/🕒).</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-green-100 border border-green-400 p-3 rounded-lg shadow"><strong>Biji Bergerak:</strong> Logika congklak berjalan.</div>
+            <div class="text-center text-gray-500 text-2xl">↓</div>
+            <div class="bg-red-100 border border-red-400 p-3 rounded-lg shadow"><strong>Apakah Permainan Selesai?</strong></div>
+            <div class="flex justify-around mt-2">
+                <div class="w-5/12 text-center">
+                    <span class="text-gray-500">→ (Tidak) →</span>
+                    <div class="bg-green-100 border border-green-400 p-3 rounded-lg shadow mt-2"><strong>Giliran Pemain 2</strong> (Ulangi siklus)</div>
+                </div>
+                <div class="w-5/12 text-center">
+                    <span class="text-gray-500">↓ (Ya)</span>
+                    <div class="bg-purple-100 border border-purple-400 p-3 rounded-lg shadow mt-2"><strong>Refleksi Mini:</strong> Anak memilih emotikon.</div>
+                    <div class="text-center text-gray-500 text-2xl">↓</div>
+                    <div class="bg-purple-100 border border-purple-400 p-3 rounded-lg shadow"><strong>Penguatan:</strong> Lencana digital muncul.</div>
+                    <div class="text-center text-gray-500 text-2xl">↓</div>
+                    <div class="bg-blue-100 border border-blue-400 p-3 rounded-lg shadow"><strong>Selesai.</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tombol Kembali ke Menu -->
+        <a href="index.html" class="block w-full bg-gray-500 text-white text-center font-bold py-3 px-6 rounded-lg shadow-lg text-lg hover:bg-gray-600 transition duration-300 mt-8">
+            Kembali ke Menu
+        </a>
+    </div>
+
+</body>
+</html>
