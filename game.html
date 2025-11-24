@@ -4,41 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Congklak Elektronik - Permainan</title>
-    <!-- Menghubungkan ke file CSS permainan -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tambahan Style untuk Ikon di Game */
+        .ikon-skor { margin-right: 5px; font-size: 1.1rem; }
+        .text-disiplin { color: #2e7d32; } /* Hijau Tua */
+        .text-jujur { color: #c62828; }    /* Merah Tua */
+        
+        /* Style Ikon Besar di Modal */
+        .ikon-besar-modal {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.3));
+        }
+        .warna-emas { color: #FFD700; }
+        .warna-hati { color: #e91e63; }
+        .warna-jam  { color: #4caf50; }
+        .warna-wajah { color: #ff9800; }
+    </style>
 </head>
 <body>
     
-    <!-- Wadah Utama Aplikasi Game -->
+    <a href="index.html" class="btn-back-menu">
+        <i class="fas fa-arrow-left"></i> Menu
+    </a>
+
     <div class="app-container">
 
-        <!-- Tombol Kembali ke Menu -->
-        <a href="index.html" class="btn-back-menu">&larr; Kembali ke Menu</a>
-
-        <!-- Notifikasi Toast -->
         <div id="toast-notif" class="toast">
             <span id="toast-pesan"></span>
         </div>
         
-        <!-- Panel Skor -->
         <div class="panel-nilai-container">
             <div id="panel-pemain-1" class="player-panel">
                 <h3>Pemain 1</h3>
                 <div class="skor-grup">
-                    <div>🕒 Disiplin: <span id="meter-disiplin-p1">0</span></div>
-                    <div>💖 Jujur: <span id="meter-jujur-p1">0</span></div>
+                    <div>
+                        <i class="fas fa-clock ikon-skor text-disiplin"></i> 
+                        Disiplin: <span id="meter-disiplin-p1">0</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-heart ikon-skor text-jujur"></i> 
+                        Jujur: <span id="meter-jujur-p1">0</span>
+                    </div>
                 </div>
             </div>
             <div id="panel-pemain-2" class="player-panel">
                 <h3>Pemain 2</h3>
                 <div class="skor-grup">
-                    <div>🕒 Disiplin: <span id="meter-disiplin-p2">0</span></div>
-                    <div>💖 Jujur: <span id="meter-jujur-p2">0</span></div>
+                    <div>
+                        <i class="fas fa-clock ikon-skor text-disiplin"></i> 
+                        Disiplin: <span id="meter-disiplin-p2">0</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-heart ikon-skor text-jujur"></i> 
+                        Jujur: <span id="meter-jujur-p2">0</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Papan Congklak -->
         <div class="papan-congklak">
             <div class="lumbung" id="lumbung-kiri" data-index="7">
                 <span class="jumlah-biji">0</span>
@@ -68,38 +95,43 @@
             </div>
         </div>
 
-        <!-- Semua Modal -->
         <div id="modal-kartu" class="modal-container tersembunyi">
             <div class="kartu-konten">
-                <div class="avatar">😊</div> 
+                <div id="kartu-ikon" class="ikon-besar-modal warna-wajah">
+                    <i class="fas fa-face-smile-beam"></i>
+                </div>
+                
                 <h3 id="kartu-judul">Kartu Kejujuran</h3>
                 <p id="kartu-teks">...</p>
                 <div id="kartu-respon"></div>
                 <button id="tombol-lanjut" disabled>Lanjut Main</button>
             </div>
         </div>
+
         <div id="modal-refleksi" class="modal-container tersembunyi">
             <div class="kartu-konten">
+                <div class="ikon-besar-modal warna-wajah">
+                    <i class="fas fa-clipboard-question"></i>
+                </div>
                 <h3>Bagaimana Perasaanmu?</h3>
-                <p>...</p>
                 <div class="refleksi-pilihan">
-                    <button class="tombol-respon">🙂 Aku jujur hari ini.</button>
-                    <button class="tombol-respon">😐 Kadang masih lupa.</button>
-                    <button class="tombol-respon">🙃 Aku mau coba lagi besok.</button>
+                    <button class="tombol-respon"><i class="fas fa-face-laugh-beam"></i> Aku jujur hari ini</button>
+                    <button class="tombol-respon"><i class="fas fa-face-meh"></i> Kadang masih lupa</button>
+                    <button class="tombol-respon"><i class="fas fa-face-frown-open"></i> Aku mau coba lagi</button>
                 </div>
             </div>
         </div>
+
         <div id="modal-lencana" class="modal-container tersembunyi">
             <div class="kartu-konten" id="lencana-konten">
                 <h3 id="lencana-judul">Selamat!</h3>
-                <div class="lencana-gambar" id="lencana-gambar">🏆</div>
+                <div id="lencana-gambar" class="ikon-besar-modal"></div>
                 <p id="lencana-teks">...</p>
                 <button id="tombol-main-lagi" class="tombol-respon">Main Lagi</button>
             </div>
         </div>
     </div>
     
-    <!-- Menghubungkan ke file JavaScript permainan -->
     <script src="script.js"></script>
 </body>
 </html>

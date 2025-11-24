@@ -1,363 +1,443 @@
 /* --- Pengaturan Global --- */
 * {
-    box-sizing: border-box; /* Mencegah padding merusak layout */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Pengaturan Dasar Halaman */
 body {
     font-family: sans-serif;
-    background-color: #E0E0E0; 
+    background-color: #3e2723; 
     display: flex;
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Wadah Utama Aplikasi */
 .app-container {
     width: 100%;
-    max-width: 450px;
+    max-width: 900px;
     min-height: 100vh;
     margin: 0 auto;
-    background-color: #F0EAD6; 
-    box-shadow: 0 0 20px rgba(0,0,0,0.15); 
+    background: #f5e6d3; 
+    box-shadow: 0 0 50px rgba(0,0,0,0.5); 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 10px;
+    padding: 20px;
+    position: relative;
 }
+
+/* Tombol Kembali (Default Desktop) */
+.btn-back-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 500;
+    
+    padding: 8px 16px;
+    background-color: #d84315; 
+    color: white;
+    text-decoration: none; 
+    border-radius: 30px; 
+    font-weight: bold;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+    font-size: 0.9rem; 
+    border: 2px solid #fff;
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
+    transition: transform 0.2s;
+}
+.btn-back-menu:active { transform: scale(0.9); }
+.btn-back-menu:hover { background-color: #bf360c; }
 
 /* Panel Nilai */
 .panel-nilai-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    max-width: 600px;
     gap: 10px;
+    margin-top: 50px; 
     margin-bottom: 20px;
 }
+
 .player-panel {
-    background: #fff;
-    border: 3px solid #8B4513;
-    border-radius: 10px;
-    padding: 10px;
+    background: #fff8e1;
+    border: 3px solid #8d6e63;
+    border-radius: 15px;
+    padding: 8px 10px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 48%;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+    flex: 1;
     transition: all 0.3s ease;
 }
+
 .player-panel.active {
-    border-color: #007BFF;
-    box-shadow: 0 4px 15px rgba(0,123,255,0.4);
+    border-color: #ffca28; 
+    background: #fffde7; 
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 202, 40, 0.6);
 }
+
 .player-panel h3 {
     font-size: 1rem;
-    margin-bottom: 5px;
-    color: #333;
-}
-.skor-grup {
-    font-size: 0.9rem;
+    margin-bottom: 2px;
+    color: #5d4037;
     font-weight: bold;
-    color: #555;
 }
-.skor-grup span {
-    color: #D2691E;
-    font-size: 1.2rem;
+
+.skor-grup {
+    font-size: 0.8rem;
+    color: #4e342e;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 /* Papan Congklak */
 .papan-congklak {
     display: flex;
+    flex-direction: row; 
     align-items: center;
-    background-color: #8B4513;
-    padding: 20px;
-    border-radius: 60px;
-    border: 10px solid #A0522D;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3), inset 0 0 15px rgba(0,0,0,0.4);
+    justify-content: center;
+    padding: 20px 30px;
+    border-radius: 100px;
+    background-color: #5D4037;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 2px, transparent 2px, transparent 4px),
+                      linear-gradient(to bottom, #5D4037, #3E2723);
+    box-shadow: 
+        inset 0 5px 10px rgba(255,255,255,0.2),
+        inset 0 -10px 20px rgba(0,0,0,0.6),
+        0 15px 30px rgba(0,0,0,0.5);
+    border: 4px solid #3E2723;
+    margin-top: 20px;
 }
+
 .area-bermain {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
+    margin: 0 20px;
 }
+
 .baris-lubang {
     display: flex;
-    gap: 15px;
+    gap: 10px;
 }
+
+/* Lubang & Biji */
 .lubang {
     width: 70px;
     height: 70px;
-    background: #D2691E;
     border-radius: 50%;
-    border: 5px solid #5C3317;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    background: #3E2723;
+    box-shadow: 
+        inset 3px 3px 10px rgba(0,0,0,0.8),
+        inset -2px -2px 5px rgba(255,255,255,0.1),
+        0 2px 4px rgba(255,255,255,0.1);
+    border: 2px solid #4E342E;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    align-content: center;
     cursor: pointer;
-    transition: all 0.2s ease-in-out; /* [UBAH] Transisi untuk semua properti */
+    padding: 8px;
+    transition: all 0.2s ease;
 }
+
+.biji {
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, #FFD700, #B8860B); 
+    border-radius: 50%;
+    margin: 1px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.6); 
+}
+
 .lumbung {
-    width: 120px;
+    width: 100px;
     height: 200px;
-    background: #D2691E;
     border-radius: 60px;
-    border: 5px solid #5C3317;
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-    margin: 0 20px;
+    background: #3E2723;
+    box-shadow: inset 5px 5px 15px rgba(0,0,0,0.8), inset -2px -2px 5px rgba(255,255,255,0.1);
+    border: 2px solid #4E342E;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.jumlah-biji {
-    font-size: 1.5rem;
+
+.jumlah-biji-angka {
+    font-size: 2.5rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-    transition: all 0.2s ease-in-out; /* [UBAH] Transisi untuk warna */
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    font-family: monospace;
 }
 
-/* [UBAH] Efek hover standar (lebih simpel) */
-.lubang:hover {
-    background-color: #E68A4D; 
-}
-
-/* --- Gaya Modal --- */
-.modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-.modal-container.tersembunyi {
-    display: none;
-}
-.kartu-konten {
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    border: 5px solid #FFD700;
-}
-.avatar {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-#kartu-teks {
-    font-size: 1.2rem;
-    margin: 15px 0;
-    min-height: 50px;
-}
-#kartu-respon {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-.tombol-respon {
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    transition: background-color 0.2s;
-}
-.tombol-respon:hover {
-    background-color: #45a049;
-}
-#tombol-lanjut {
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-}
-#tombol-lanjut:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* --- [UBAH] Gaya untuk Logika Permainan --- */
-
-/* [BARU] Gaya permanen untuk lubang & biji Pemain 1 */
+/* Highlight Giliran */
 .lubang.giliran-pemain-1 {
-    background-color: #E6F2FF; /* Latar lubang biru muda */
-    border-color: #007BFF; /* Border biru */
+    box-shadow: inset 0 0 20px rgba(0, 180, 255, 0.4), 0 0 10px rgba(0, 180, 255, 0.6);
+    border-color: #00B4FF;
 }
-.lubang.giliran-pemain-1 .jumlah-biji {
-    color: #004A99; /* Warna angka biru tua */
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.5); /* Shadow terang */
-}
-.lubang.giliran-pemain-1:hover {
-    background-color: #D1E9FF; /* Biru lebih cerah saat disentuh */
-}
-
-/* [BARU] Gaya permanen untuk lubang & biji Pemain 2 */
 .lubang.giliran-pemain-2 {
-    background-color: #FFF9E6; /* Latar lubang kuning muda */
-    border-color: #FFD700; /* Border kuning */
-}
-.lubang.giliran-pemain-2 .jumlah-biji {
-    color: #B8860B; /* Warna angka kuning tua/emas */
-    text-shadow: 1px 1px 1px rgba(255,255,255,0.5); /* Shadow terang */
-}
-.lubang.giliran-pemain-2:hover {
-    background-color: #FFF2CC; /* Kuning lebih cerah saat disentuh */
-}
-
-/* Gaya untuk lubang yang TIDAK BISA diklik (Kosong) */
-.lubang.nonaktif {
-    cursor: not-allowed;
-    opacity: 0.7;
-    /* Kembalikan ke warna kayu jika nonaktif */
-    background-color: #D2691E;
-    border-color: #5C3317;
-}
-.lubang.nonaktif .jumlah-biji {
-    /* Kembalikan ke warna putih jika nonaktif */
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
-}
-.lubang.nonaktif:hover {
-    background-color: #D2691E; /* Tidak ada efek hover jika nonaktif */
-}
-
-
-/* --- Gaya Modal Refleksi & Lencana --- */
-.refleksi-pilihan {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px;
-}
-.lencana-gambar {
-    font-size: 5rem;
-    margin: 10px 0;
-}
-#tombol-main-lagi {
-    background-color: #007BFF;
-    margin-top: 20px;
-}
-#tombol-main-lagi:hover {
-    background-color: #0056b3;
-}
-#lencana-konten.disiplin {
-    border-color: #90EE90;
-}
-#lencana-konten.jujur {
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.3), 0 0 10px rgba(255, 215, 0, 0.6);
     border-color: #FFD700;
 }
+.lubang.highlight-gerak, .lumbung.highlight-gerak {
+    background-color: #5D4037 !important;
+    box-shadow: inset 0 0 0 3px #FFF, 0 0 20px #FFF !important;
+    transform: scale(1.1);
+}
+.lubang.nonaktif { opacity: 0.7; cursor: not-allowed; }
 
-/* --- Gaya Toast Notification --- */
+/* Modal */
+.modal-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+}
+.modal-container.tersembunyi { display: none; }
+
+.kartu-konten {
+    background: #fff8e1; border-radius: 20px; padding: 20px 30px;
+    width: 90%; max-width: 400px; text-align: center;
+    border: 5px solid #8d6e63; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.avatar { font-size: 3rem; margin-bottom: 5px; }
+#kartu-judul { font-size: 1.2rem; color: #5d4037; margin-bottom: 5px; }
+#kartu-teks { font-size: 1.1rem; margin: 10px 0; min-height: 40px; font-weight: 500; }
+#kartu-respon { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+.tombol-respon {
+    font-size: 1rem; font-weight: bold; padding: 12px; border-radius: 10px;
+    background-color: #66bb6a; color: white; width: 100%; margin-bottom: 10px;
+    box-shadow: 0 4px 0 #388e3c;
+}
+.tombol-respon:active { transform: translateY(4px); box-shadow: none; }
+
+#tombol-lanjut {
+    font-size: 1.1rem; font-weight: bold; padding: 12px 20px; border-radius: 10px;
+    background-color: #2196F3; color: white; width: 100%; margin-top: 5px;
+    box-shadow: 0 4px 0 #0d47a1;
+}
+#tombol-lanjut:active { transform: translateY(4px); box-shadow: none; }
+#tombol-lanjut:disabled { background-color: #bdbdbd; box-shadow: none; cursor: not-allowed; transform: none; }
+
 .toast {
-    visibility: hidden; 
-    opacity: 0;
-    min-width: 250px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 8px;
-    padding: 16px;
-    position: fixed;
-    z-index: 2000;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    visibility: hidden; opacity: 0; min-width: 250px;
+    background-color: #3e2723; color: #ffecb3;
+    text-align: center; border-radius: 8px; padding: 16px;
+    position: fixed; z-index: 2000;
+    left: 50%; transform: translateX(-50%); top: 30px;
+    font-size: 1.2rem; font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 2px solid #8d6e63;
     transition: opacity 0.5s ease;
 }
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-    animation: slidein 0.5s ease;
-}
-@keyframes slidein {
-    from { top: -50px; opacity: 0; }
-    to { top: 30px; opacity: 1; }
-}
+.toast.show { visibility: visible; opacity: 1; animation: slidein 0.5s ease; }
+@keyframes slidein { from { top: -50px; opacity: 0; } to { top: 30px; opacity: 1; } }
 
-/* --- Tampilan Mobile (Responsive Design) --- */
-@media (min-width: 451px) {
+/* --- [SOLUSI FINAL] PAKSA LANDSCAPE DI HP --- */
+
+/* --- [SOLUSI FINAL: TOMBOL KANAN MINI] --- */
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    
+    body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        position: fixed;
+    }
+
+    /* Rotasi seluruh Game 90 Derajat */
     .app-container {
-        min-height: auto;
+        width: 100vh !important;
+        height: 100vw !important;
+        max-width: none !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        
+        padding: 0; 
+        justify-content: center; 
+    }
+
+    /* [PERBAIKAN: TOMBOL KANAN MINI] */
+    .btn-back-menu {
+        position: absolute;
+        
+        /* 1. Kembalikan ke KANAN tapi lebih mepet pojok */
+        right: 15px;      
+        top: 15px;       
+        left: auto;     /* Pastikan kiri mati */
+        
+        /* 2. PERKECIL UKURAN (Agar tidak menimpa) */
+        font-size: 0.65rem;   /* Huruf kecil */
+        padding: 4px 10px;    /* Tombol tipis */
+        width: auto;
         height: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border-radius: 20px;
+        
+        /* Tetap rotasi agar teks terbaca miring */
+        transform: rotate(90deg); 
+        transform-origin: center;
+        
+        border-radius: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        z-index: 99999;
     }
-}
-@media (max-width: 450px) {
-    .panel-nilai-container { width: 95vw; }
+
+    /* [PENTING] Geser Panel Skor agar memberi ruang untuk tombol di kanan atas */
+    .panel-nilai-container {
+        width: 80% !important;
+        /* Tambah jarak margin atas agar panel turun ke bawah menjauhi tombol */
+        margin-top: 50px; 
+        margin-bottom: 5px;
+        gap: 5px;
+    }
+
     .player-panel {
-        padding: 8px;
-        width: 48%;
+        padding: 4px 6px; 
+        border-radius: 8px;
+        border-width: 2px;
     }
-    .player-panel h3 { font-size: 0.9rem; }
-    .skor-grup { font-size: 0.7rem; }
-    .skor-grup span { font-size: 1rem; }
+    .player-panel h3 { font-size: 0.85rem; margin-bottom: 0; }
+    .skor-grup { font-size: 0.7rem; gap: 0; }
 
+    /* Papan Horizontal */
     .papan-congklak {
-        flex-direction: column;
-        width: 95vw;
-        padding: 15px 10px;
-        border-radius: 20px;
+        transform: scale(0.85) !important; 
+        margin: 0 !important; 
+        flex-direction: row !important;
     }
-    .lumbung {
-        width: 90%;
-        height: 70px;
-        margin: 10px 0;
-    }
-    #lumbung-kanan { order: 1; }
-    .area-bermain  { order: 2; width: 100%; }
-    #lumbung-kiri  { order: 3; }
-    .baris-lubang {
+
+    /* Kartu & Toast (Tetap) */
+    .kartu-konten {
+        /* Gunakan lebar relatif terhadap Tinggi Layar (karena dirotasi) */
+        width: 85vh !important;  /* Ambil 85% dari panjang HP */
+        max-width: 500px !important;
+        
+        /* Agar tidak terlalu tinggi menutupi layar */
+        padding: 15px !important;
+        gap: 5px !important;
+        
+        /* Flexbox untuk merapikan isi */
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* 2. PERKECIL IKON BESAR DI KARTU */
+    .ikon-besar-modal {
+        font-size: 2.5rem !important; /* Perkecil ikon avatar/piala */
+        margin-bottom: 5px !important;
+    }
+
+    /* 3. SESUAIKAN TEKS */
+    #kartu-judul {
+        font-size: 1.1rem !important;
+        margin-bottom: 2px !important;
+    }
+    #kartu-teks {
+        font-size: 0.9rem !important;
+        margin: 5px 0 !important;
+        line-height: 1.2;
+    }
+
+    /* 4. TOMBOL RESPON LEBIH RAMPING & BERJAJAR */
+    #kartu-respon {
+        /* Ubah susunan tombol jadi menyamping (row) agar hemat tempat vertikal */
+        display: flex !important;
+        flex-direction: row !important; 
+        gap: 8px !important;
         width: 100%;
-        justify-content: space-between;
+        justify-content: center;
     }
-    /* [UBAH] Ukuran lubang mobile disesuaikan */
-    .lubang {
-        width: 11.5vw; /* Sedikit lebih kecil agar pas */
-        height: 11.5vw;
-        border-width: 3px;
+
+    .tombol-respon {
+        padding: 8px 10px !important; /* Tombol lebih tipis */
+        font-size: 0.85rem !important;
+        margin-bottom: 0 !important;
+        flex: 1; /* Agar lebar tombol sama rata */
+        white-space: nowrap; /* Teks jangan turun baris */
     }
-    .jumlah-biji { font-size: 1rem; }
-    .kartu-konten { width: 90vw; }
-    .toast { width: 90vw; }
+
+    /* Tombol Lanjut Main */
+    #tombol-lanjut {
+        padding: 8px !important;
+        font-size: 0.9rem !important;
+        margin-top: 5px !important;
+    }
+    .toast {
+        width: 60vh;
+        top: 20px;
+    }
 }
 
-/* Gaya untuk tombol kembali di halaman game */
-.btn-back-menu {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #6c757d;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    align-self: flex-start;
-    transition: background-color 0.2s;
+/* Media Query Landscape Asli */
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    .app-container {
+        height: auto;
+        min-height: 100vh;
+        padding: 10px;
+        justify-content: center;
+    }
+    .papan-congklak {
+        transform: scale(0.8);
+        margin: 0;
+    }
+    .panel-nilai-container {
+        margin-top: 10px;
+    }
+    .btn-back-menu {
+        top: 15px;
+        left: 15px;
+        right: auto;
+        bottom: auto;
+        transform: none;
+    }
 }
-.btn-back-menu:hover {
-    background-color: #5a6268;
+/* --- [UPDATE: IKON REALISTIS & JELAS PADA KARTU] --- */
+
+/* 1. Ikon Besar (Avatar di atas kartu) */
+.ikon-besar-modal i {
+    /* Efek Bayangan Ganda agar lebih dalam */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 
+                 -1px -1px 2px rgba(255, 255, 255, 0.2); 
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.4));
+    /* Sedikit efek 3D saat dirender */
+    transform: perspective(500px) translateZ(5px);
 }
 
+/* 2. Ikon pada Judul Kartu (Disiplin/Jujur) */
+#kartu-judul i {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    font-size: 1.3rem; /* Perbesar sedikit agar lebih jelas */
+    margin-right: 8px;
+}
+
+/* 3. Ikon pada Tombol Respon (Centang/Orang) */
+.tombol-respon i {
+    /* Memberi bingkai lingkaran tipis agar ikon lebih fokus */
+    background: rgba(255, 255, 255, 0.3);
+    padding: 4px;
+    border-radius: 50%;
+    margin-right: 8px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 2px rgba(0,0,0,0.2);
+}
+
+/* Khusus untuk Ikon Disiplin (Jam) - Beri efek cahaya hijau */
+.warna-jam i, .text-disiplin {
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.7), 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Khusus untuk Ikon Jujur (Hati) - Beri efek cahaya merah muda */
+.warna-hati i, .text-jujur {
+    text-shadow: 0 0 5px rgba(233, 30, 99, 0.7), 1px 1px 2px rgba(0,0,0,0.5);
+}

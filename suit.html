@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suit Penentuan - 2 Pemain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #3e2723;
+            font-family: sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; overflow: hidden;
+        }
+        .game-card {
+            background-color: #f5e6d3; border: 4px solid #8d6e63;
+            width: 90%; max-width: 500px; padding: 20px;
+            border-radius: 20px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .hand-icon { 
+            font-size: 4rem; 
+            height: 80px; /* Menjaga tinggi tetap stabil */
+            display: flex; align-items: center; justify-content: center;
+            color: #5d4037; /* Warna coklat tua agar senada */
+            transition: transform 0.2s; 
+        }
+        
+        /* Animasi Hasil */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .show-result { animation: popIn 0.5s ease-out forwards; }
+
+        .hidden { display: none; }
+        
+        .option-btn {
+            font-size: 2rem; width: 80px; height: 80px;
+            border-radius: 50%; border: 3px solid #8d6e63;
+            background: white; transition: all 0.1s;
+            display: flex; align-items: center; justify-content: center;
+            color: #5d4037;
+            box-shadow: 0 4px 0 #6d4c41;
+        }
+        .option-btn:active { transform: translateY(4px); box-shadow: none; }
+        
+        /* Helper untuk rotasi ikon gunting agar lebih pas */
+        .fa-hand-scissors { transform: rotate(90deg); }
+    </style>
+</head>
+<body>
+
+    <div class="game-card">
+        
+        <!-- Header -->
+        <h1 class="text-2xl font-bold text-[#5d4037] mb-2">Suit Penentuan</h1>
+        <p id="instruction-text" class="text-[#8d6e63] font-bold mb-6 text-lg">
+            Giliran Pemain 1
+        </p>
+
+        <!-- Area Pertarungan (Hasil Akhir) -->
+        <div id="battle-arena" class="hidden flex justify-around items-center mb-8 bg-[#fff8e1] p-4 rounded-xl border-2 border-[#8d6e63]">
+            <div class="text-center">
+                <p class="text-sm font-bold text-blue-600 mb-1">Pemain 1</p>
+                <!-- Default Batu -->
+                <div id="p1-result" class="hand-icon"><i class="fas fa-hand-back-fist"></i></div>
+            </div>
+            <div class="text-2xl font-bold text-orange-500">VS</div>
+            <div class="text-center">
+                <p class="text-sm font-bold text-red-600 mb-1">Pemain 2</p>
+                <!-- Default Batu (Dibalik arahnya) -->
+                <div id="p2-result" class="hand-icon transform -scale-x-100"><i class="fas fa-hand-back-fist"></i></div>
+            </div>
+        </div>
+
+        <!-- Area Pesan Rahasia (Overlay) -->
+        <div id="secret-overlay" class="hidden mb-6">
+            <div class="text-6xl mb-4 text-[#5d4037]"><i class="fas fa-user-secret"></i></div>
+            <p class="text-lg font-bold text-[#5d4037]">Pilihan Pemain 1 Disimpan!</p>
+            <p class="text-sm text-gray-600 mb-4">Sekarang giliran Pemain 2.<br>Pemain 1 jangan mengintip ya!</p>
+            <button onclick="startPlayer2()" class="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:bg-blue-600">
+                Lanjut ke Pemain 2
+            </button>
+        </div>
+
+        <!-- Tombol Pilihan -->
+        <div id="choices-container" class="flex gap-4 justify-center">
+            <button onclick="choose('batu')" class="option-btn">
+                <i class="fas fa-hand-back-fist"></i>
+            </button>
+            <button onclick="choose('gunting')" class="option-btn">
+                <i class="fas fa-hand-scissors"></i>
+            </button>
+            <button onclick="choose('kertas')" class="option-btn">
+                <i class="fas fa-hand"></i>
+            </button>
+        </div>
+
+        <!-- Hasil Teks & Tombol Lanjut -->
+        <div id="final-result-area" class="hidden mt-6">
+            <h2 id="winner-text" class="text-2xl font-bold text-green-600 mb-4"></h2>
+            <button onclick="resetSuit()" class="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg mr-2 shadow-md">
+                Ulangi
+            </button>
+            <a href="game.html" class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:bg-green-700 inline-block">
+                Main Congklak!
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const instructionText = document.getElementById('instruction-text');
+        const choicesContainer = document.getElementById('choices-container');
+        const secretOverlay = document.getElementById('secret-overlay');
+        const battleArena = document.getElementById('battle-arena');
+        const finalResultArea = document.getElementById('final-result-area');
+        const p1ResultIcon = document.getElementById('p1-result');
+        const p2ResultIcon = document.getElementById('p2-result');
+        const winnerText = document.getElementById('winner-text');
+
+        let p1Choice = '';
+        let p2Choice = '';
+        let turn = 1; // 1 = Pemain 1, 2 = Pemain 2
+
+        // Peta kode ikon (HTML String)
+        const icons = { 
+            'batu': '<i class="fas fa-hand-back-fist"></i>', 
+            'gunting': '<i class="fas fa-hand-scissors"></i>', 
+            'kertas': '<i class="fas fa-hand"></i>' 
+        };
+
+        function choose(choice) {
+            if (turn === 1) {
+                // Giliran Pemain 1 Selesai
+                p1Choice = choice;
+                instructionText.innerText = "Rahasia...";
+                choicesContainer.classList.add('hidden');
+                secretOverlay.classList.remove('hidden');
+            } else {
+                // Giliran Pemain 2 Selesai
+                p2Choice = choice;
+                showResult();
+            }
+        }
+
+        function startPlayer2() {
+            secretOverlay.classList.add('hidden');
+            choicesContainer.classList.remove('hidden');
+            instructionText.innerText = "Giliran Pemain 2: Pilih Senjatamu";
+            turn = 2;
+        }
+
+        function showResult() {
+            choicesContainer.classList.add('hidden');
+            instructionText.innerText = "Hasilnya adalah...";
+            
+            // Tampilkan Arena
+            battleArena.classList.remove('hidden');
+            
+            // Set HTML ikon (bukan text)
+            p1ResultIcon.innerHTML = icons[p1Choice];
+            p2ResultIcon.innerHTML = icons[p2Choice];
+            
+            // Tambah animasi
+            p1ResultIcon.classList.add('show-result');
+            p2ResultIcon.classList.add('show-result');
+
+            // Logika Menang
+            let resultMessage = "";
+            if (p1Choice === p2Choice) {
+                resultMessage = "SERI! Ulangi lagi ya.";
+            } else if (
+                (p1Choice === 'batu' && p2Choice === 'gunting') ||
+                (p1Choice === 'gunting' && p2Choice === 'kertas') ||
+                (p1Choice === 'kertas' && p2Choice === 'batu')
+            ) {
+                resultMessage = "Pemain 1 Jalan Duluan! 🎉";
+            } else {
+                resultMessage = "Pemain 2 Jalan Duluan! 🎉";
+            }
+
+            winnerText.innerText = resultMessage;
+            finalResultArea.classList.remove('hidden');
+        }
+
+        function resetSuit() {
+            p1Choice = '';
+            p2Choice = '';
+            turn = 1;
+            
+            // Reset UI
+            finalResultArea.classList.add('hidden');
+            battleArena.classList.add('hidden');
+            choicesContainer.classList.remove('hidden');
+            secretOverlay.classList.add('hidden');
+            
+            instructionText.innerText = "Giliran Pemain 1: Pilih Senjatamu";
+            p1ResultIcon.classList.remove('show-result');
+            p2ResultIcon.classList.remove('show-result');
+        }
+    </script>
+</body>
+</html>
