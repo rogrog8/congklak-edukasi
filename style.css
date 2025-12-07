@@ -245,7 +245,7 @@ body {
 
 /* --- [SOLUSI FINAL: TOMBOL KANAN MINI] --- */
 
-@media screen and (max-width: 768px) and (orientation: portrait) {
+@media screen and (max-width: 1024px) and (orientation: portrait) {
     
     body {
         width: 100vw;
@@ -272,14 +272,16 @@ body {
     .btn-back-menu {
         position: absolute;
         
-        /* 1. Kembalikan ke KANAN tapi lebih mepet pojok */
-        right: 15px;      
-        top: 15px;       
-        left: auto;     /* Pastikan kiri mati */
+        /* [UBAH] Tambah jarak dari kanan dan atas agar tidak mepet garis */
+        right: 10px;   /* Semula 15px, diperbesar jadi 25px */
+        top: 25px;    /* Semula 15px, diperbesar jadi 25px */
         
-        /* 2. PERKECIL UKURAN (Agar tidak menimpa) */
-        font-size: 0.65rem;   /* Huruf kecil */
-        padding: 4px 10px;    /* Tombol tipis */
+        left: auto;     /* Pastikan properti kiri mati */
+        
+        /* [UBAH] Perkecil sedikit ukuran agar lebih proporsional di sudut */
+        font-size: 0.6rem;    /* Semula 0.65rem */
+        padding: 4px 8px;     /* Semula 4px 10px (tombol jadi lebih pendek) */
+        
         width: auto;
         height: auto;
         
@@ -287,7 +289,9 @@ body {
         transform: rotate(90deg); 
         transform-origin: center;
         
-        border-radius: 15px;
+        /* Tambah radius agar lebih bulat dan halus */
+        border-radius: 20px; /* Semula 15px */
+        
         box-shadow: 0 2px 4px rgba(0,0,0,0.4);
         z-index: 99999;
     }
@@ -295,7 +299,6 @@ body {
     /* [PENTING] Geser Panel Skor agar memberi ruang untuk tombol di kanan atas */
     .panel-nilai-container {
         width: 80% !important;
-        /* Tambah jarak margin atas agar panel turun ke bawah menjauhi tombol */
         margin-top: 50px; 
         margin-bottom: 5px;
         gap: 5px;
@@ -377,6 +380,77 @@ body {
         width: 60vh;
         top: 20px;
     }
+}
+/* --- 2. KHUSUS TABLET (Layar Besar 769px - 1366px) --- */
+@media screen and (min-width: 769px) and (max-width: 1366px) and (orientation: portrait) {
+    
+    body {
+        width: 100vw; height: 100vh; overflow: hidden; position: fixed;
+    }
+
+    .app-container {
+        width: 100vh !important;
+        height: 100vw !important;
+        max-width: none !important;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(90deg);
+        padding: 0; 
+        justify-content: center; 
+    }
+
+    /* [TABLET] PERBAIKAN TOMBOL MENU */
+    .btn-back-menu {
+        position: absolute;
+        
+        /* [SOLUSI] Ganti Right jadi Left */
+        right: 40px;  
+        top: 40px; 
+        
+        left: auto;     /* Pastikan properti kiri mati */
+        
+        font-size: 1rem;       
+        padding: 10px 20px;    
+        width: auto; height: auto;
+        
+        transform: rotate(90deg); 
+        transform-origin: center;
+        border-radius: 50px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        z-index: 99999;
+    }
+
+    /* [TABLET] Geser Panel Skor */
+    .panel-nilai-container {
+        width: 80% !important;
+        margin-top: 80px; 
+        
+        /* [SOLUSI] Perbesar jarak bawah agar tidak mepet papan yang membesar */
+        margin-bottom: 60px; /* Semula 10px, ubah jadi 60px - 80px */
+        
+        gap: 10px;
+    }
+    
+    .player-panel { padding: 8px 12px; border-radius: 12px; }
+    .player-panel h3 { font-size: 1.2rem; }
+    .skor-grup { font-size: 1rem; gap: 2px; }
+
+    /* [TABLET] Papan Besar (Scale 1.3) */
+    .papan-congklak { transform: scale(1.3) !important; margin: 0 !important; flex-direction: row !important; }
+    
+    .kartu-konten { 
+        width: 70vh !important; max-width: 700px !important;
+        padding: 30px !important;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .ikon-besar-modal { font-size: 4rem !important; margin-bottom: 15px !important; }
+    #kartu-judul { font-size: 1.5rem !important; margin-bottom: 10px !important; }
+    #kartu-teks { font-size: 1.3rem !important; margin: 15px 0 !important; line-height: 1.4; }
+    #kartu-respon { display: flex !important; flex-direction: row !important; gap: 20px !important; width: 100%; justify-content: center; }
+    .tombol-respon { padding: 15px 20px !important; font-size: 1.1rem !important; margin-bottom: 0 !important; flex: 1; white-space: nowrap; }
+    #tombol-lanjut { font-size: 1.2rem !important; padding: 15px !important; margin-top: 15px !important; }
+    .toast { width: 50vh; top: 30px; font-size: 1.5rem; }
 }
 
 /* Media Query Landscape Asli */

@@ -22,9 +22,9 @@
         }
         .hand-icon { 
             font-size: 4rem; 
-            height: 80px; /* Menjaga tinggi tetap stabil */
+            height: 80px; 
             display: flex; align-items: center; justify-content: center;
-            color: #5d4037; /* Warna coklat tua agar senada */
+            color: #5d4037; 
             transition: transform 0.2s; 
         }
         
@@ -48,7 +48,6 @@
         }
         .option-btn:active { transform: translateY(4px); box-shadow: none; }
         
-        /* Helper untuk rotasi ikon gunting agar lebih pas */
         .fa-hand-scissors { transform: rotate(90deg); }
     </style>
 </head>
@@ -56,28 +55,23 @@
 
     <div class="game-card">
         
-        <!-- Header -->
         <h1 class="text-2xl font-bold text-[#5d4037] mb-2">Suit Penentuan</h1>
         <p id="instruction-text" class="text-[#8d6e63] font-bold mb-6 text-lg">
             Giliran Pemain 1
         </p>
 
-        <!-- Area Pertarungan (Hasil Akhir) -->
         <div id="battle-arena" class="hidden flex justify-around items-center mb-8 bg-[#fff8e1] p-4 rounded-xl border-2 border-[#8d6e63]">
             <div class="text-center">
                 <p class="text-sm font-bold text-blue-600 mb-1">Pemain 1</p>
-                <!-- Default Batu -->
                 <div id="p1-result" class="hand-icon"><i class="fas fa-hand-back-fist"></i></div>
             </div>
             <div class="text-2xl font-bold text-orange-500">VS</div>
             <div class="text-center">
                 <p class="text-sm font-bold text-red-600 mb-1">Pemain 2</p>
-                <!-- Default Batu (Dibalik arahnya) -->
                 <div id="p2-result" class="hand-icon transform -scale-x-100"><i class="fas fa-hand-back-fist"></i></div>
             </div>
         </div>
 
-        <!-- Area Pesan Rahasia (Overlay) -->
         <div id="secret-overlay" class="hidden mb-6">
             <div class="text-6xl mb-4 text-[#5d4037]"><i class="fas fa-user-secret"></i></div>
             <p class="text-lg font-bold text-[#5d4037]">Pilihan Pemain 1 Disimpan!</p>
@@ -87,7 +81,6 @@
             </button>
         </div>
 
-        <!-- Tombol Pilihan -->
         <div id="choices-container" class="flex gap-4 justify-center">
             <button onclick="choose('batu')" class="option-btn">
                 <i class="fas fa-hand-back-fist"></i>
@@ -100,13 +93,13 @@
             </button>
         </div>
 
-        <!-- Hasil Teks & Tombol Lanjut -->
         <div id="final-result-area" class="hidden mt-6">
             <h2 id="winner-text" class="text-2xl font-bold text-green-600 mb-4"></h2>
             <button onclick="resetSuit()" class="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg mr-2 shadow-md">
                 Ulangi
             </button>
-            <a href="game.html" class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:bg-green-700 inline-block">
+            
+            <a id="btn-lanjut" href="game.html" class="bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg hover:bg-green-700 inline-block">
                 Main Congklak!
             </a>
         </div>
@@ -114,6 +107,19 @@
     </div>
 
     <script>
+        // --- [BARU] Setup Audio ---
+        const suaraKlik = new Audio('audio/klik.mp3');
+        const suaraNotif = new Audio('audio/notif.mp3');   // Untuk Seri / Ganti Giliran
+        const suaraHasil = new Audio('audio/sukses.mp3');  // Untuk Menang
+
+        function mainkanSuara(audioObj) {
+            if (audioObj) {
+                audioObj.currentTime = 0;
+                audioObj.play().catch(e => console.log("Audio belum siap/diblokir browser"));
+            }
+        }
+        // --------------------------
+
         const instructionText = document.getElementById('instruction-text');
         const choicesContainer = document.getElementById('choices-container');
         const secretOverlay = document.getElementById('secret-overlay');
@@ -122,12 +128,12 @@
         const p1ResultIcon = document.getElementById('p1-result');
         const p2ResultIcon = document.getElementById('p2-result');
         const winnerText = document.getElementById('winner-text');
+        const btnLanjut = document.getElementById('btn-lanjut');
 
         let p1Choice = '';
         let p2Choice = '';
-        let turn = 1; // 1 = Pemain 1, 2 = Pemain 2
+        let turn = 1; 
 
-        // Peta kode ikon (HTML String)
         const icons = { 
             'batu': '<i class="fas fa-hand-back-fist"></i>', 
             'gunting': '<i class="fas fa-hand-scissors"></i>', 
@@ -135,20 +141,26 @@
         };
 
         function choose(choice) {
+            mainkanSuara(suaraKlik); // Bunyi Klik
+
             if (turn === 1) {
-                // Giliran Pemain 1 Selesai
                 p1Choice = choice;
                 instructionText.innerText = "Rahasia...";
                 choicesContainer.classList.add('hidden');
-                secretOverlay.classList.remove('hidden');
+                
+                // Animasi/Jeda sedikit sebelum overlay muncul
+                setTimeout(() => {
+                    mainkanSuara(suaraNotif); // Bunyi notif ganti orang
+                    secretOverlay.classList.remove('hidden');
+                }, 300);
             } else {
-                // Giliran Pemain 2 Selesai
                 p2Choice = choice;
                 showResult();
             }
         }
 
         function startPlayer2() {
+            mainkanSuara(suaraKlik);
             secretOverlay.classList.add('hidden');
             choicesContainer.classList.remove('hidden');
             instructionText.innerText = "Giliran Pemain 2: Pilih Senjatamu";
@@ -159,29 +171,37 @@
             choicesContainer.classList.add('hidden');
             instructionText.innerText = "Hasilnya adalah...";
             
-            // Tampilkan Arena
             battleArena.classList.remove('hidden');
-            
-            // Set HTML ikon (bukan text)
             p1ResultIcon.innerHTML = icons[p1Choice];
             p2ResultIcon.innerHTML = icons[p2Choice];
-            
-            // Tambah animasi
             p1ResultIcon.classList.add('show-result');
             p2ResultIcon.classList.add('show-result');
 
-            // Logika Menang
             let resultMessage = "";
+            let winningPlayer = 1; 
+
             if (p1Choice === p2Choice) {
+                mainkanSuara(suaraNotif); // Bunyi 'tung!' kalau seri
                 resultMessage = "SERI! Ulangi lagi ya.";
-            } else if (
-                (p1Choice === 'batu' && p2Choice === 'gunting') ||
-                (p1Choice === 'gunting' && p2Choice === 'kertas') ||
-                (p1Choice === 'kertas' && p2Choice === 'batu')
-            ) {
-                resultMessage = "Pemain 1 Jalan Duluan! 🎉";
+                btnLanjut.style.display = 'none';
             } else {
-                resultMessage = "Pemain 2 Jalan Duluan! 🎉";
+                // Ada Pemenang
+                mainkanSuara(suaraHasil); // Bunyi 'Tadaa/Hore!'
+                btnLanjut.style.display = 'inline-block';
+
+                if (
+                    (p1Choice === 'batu' && p2Choice === 'gunting') ||
+                    (p1Choice === 'gunting' && p2Choice === 'kertas') ||
+                    (p1Choice === 'kertas' && p2Choice === 'batu')
+                ) {
+                    resultMessage = "Pemain 1 Jalan Duluan! 🎉";
+                    winningPlayer = 1;
+                } else {
+                    resultMessage = "Pemain 2 Jalan Duluan! 🎉";
+                    winningPlayer = 2;
+                }
+                
+                btnLanjut.href = "game.html?giliran=" + winningPlayer;
             }
 
             winnerText.innerText = resultMessage;
@@ -189,11 +209,11 @@
         }
 
         function resetSuit() {
+            mainkanSuara(suaraKlik);
             p1Choice = '';
             p2Choice = '';
             turn = 1;
             
-            // Reset UI
             finalResultArea.classList.add('hidden');
             battleArena.classList.add('hidden');
             choicesContainer.classList.remove('hidden');
@@ -202,6 +222,8 @@
             instructionText.innerText = "Giliran Pemain 1: Pilih Senjatamu";
             p1ResultIcon.classList.remove('show-result');
             p2ResultIcon.classList.remove('show-result');
+            
+            btnLanjut.href = "game.html";
         }
     </script>
 </body>

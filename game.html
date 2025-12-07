@@ -7,12 +7,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Tambahan Style untuk Ikon di Game */
         .ikon-skor { margin-right: 5px; font-size: 1.1rem; }
-        .text-disiplin { color: #2e7d32; } /* Hijau Tua */
-        .text-jujur { color: #c62828; }    /* Merah Tua */
-        
-        /* Style Ikon Besar di Modal */
+        .text-disiplin { color: #2e7d32; }
+        .text-jujur { color: #c62828; }
         .ikon-besar-modal {
             font-size: 4rem;
             margin-bottom: 15px;
@@ -39,46 +36,35 @@
         
         <div class="panel-nilai-container">
             <div id="panel-pemain-1" class="player-panel">
-                <h3>Pemain 1</h3>
+                <h3>Pemain 1 (Bawah)</h3>
                 <div class="skor-grup">
-                    <div>
-                        <i class="fas fa-clock ikon-skor text-disiplin"></i> 
-                        Disiplin: <span id="meter-disiplin-p1">0</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-heart ikon-skor text-jujur"></i> 
-                        Jujur: <span id="meter-jujur-p1">0</span>
-                    </div>
+                    <div><i class="fas fa-clock ikon-skor text-disiplin"></i> Disiplin: <span id="meter-disiplin-p1">0</span></div>
+                    <div><i class="fas fa-heart ikon-skor text-jujur"></i> Jujur: <span id="meter-jujur-p1">0</span></div>
                 </div>
             </div>
             <div id="panel-pemain-2" class="player-panel">
-                <h3>Pemain 2</h3>
+                <h3>Pemain 2 (Atas)</h3>
                 <div class="skor-grup">
-                    <div>
-                        <i class="fas fa-clock ikon-skor text-disiplin"></i> 
-                        Disiplin: <span id="meter-disiplin-p2">0</span>
-                    </div>
-                    <div>
-                        <i class="fas fa-heart ikon-skor text-jujur"></i> 
-                        Jujur: <span id="meter-jujur-p2">0</span>
-                    </div>
+                    <div><i class="fas fa-clock ikon-skor text-disiplin"></i> Disiplin: <span id="meter-disiplin-p2">0</span></div>
+                    <div><i class="fas fa-heart ikon-skor text-jujur"></i> Jujur: <span id="meter-jujur-p2">0</span></div>
                 </div>
             </div>
         </div>
 
         <div class="papan-congklak">
-            <div class="lumbung" id="lumbung-kiri" data-index="7">
+            <div class="lumbung" id="lumbung-kiri" data-index="15">
                 <span class="jumlah-biji">0</span>
             </div>
+
             <div class="area-bermain">
                 <div class="baris-lubang">
-                    <div class="lubang" data-index="8"><span class="jumlah-biji">7</span></div>
-                    <div class="lubang" data-index="9"><span class="jumlah-biji">7</span></div>
-                    <div class="lubang" data-index="10"><span class="jumlah-biji">7</span></div>
-                    <div class="lubang" data-index="11"><span class="jumlah-biji">7</span></div>
-                    <div class="lubang" data-index="12"><span class="jumlah-biji">7</span></div>
-                    <div class="lubang" data-index="13"><span class="jumlah-biji">7</span></div>
                     <div class="lubang" data-index="14"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="13"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="12"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="11"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="10"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="9"><span class="jumlah-biji">7</span></div>
+                    <div class="lubang" data-index="8"><span class="jumlah-biji">7</span></div>
                 </div>
                 <div class="baris-lubang">
                     <div class="lubang" data-index="0"><span class="jumlah-biji">7</span></div>
@@ -90,7 +76,8 @@
                     <div class="lubang" data-index="6"><span class="jumlah-biji">7</span></div>
                 </div>
             </div>
-            <div class="lumbung" id="lumbung-kanan" data-index="15">
+
+            <div class="lumbung" id="lumbung-kanan" data-index="7">
                 <span class="jumlah-biji">0</span>
             </div>
         </div>
@@ -100,7 +87,6 @@
                 <div id="kartu-ikon" class="ikon-besar-modal warna-wajah">
                     <i class="fas fa-face-smile-beam"></i>
                 </div>
-                
                 <h3 id="kartu-judul">Kartu Kejujuran</h3>
                 <p id="kartu-teks">...</p>
                 <div id="kartu-respon"></div>
@@ -131,7 +117,7 @@
             </div>
         </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
