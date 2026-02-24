@@ -47,30 +47,51 @@ function stopMusikLatar() {
     musikLatar.currentTime = 0; // Reset ke awal lagu
 }
 
-// 1. DEFINISI DATA KARTU (VERSI BARU: LEBIH NATURAL & EMOJI REAL)
+// 1. DEFINISI DATA KARTU (VERSI BARU DARI DRAFT)
 const daftarKartu = [
     // --- KATEGORI: DISIPLIN (🕒) ---
-    { tipe: "disiplin", teks: "Habis bangun tidur, kasurnya dibiarin berantakan atau dirapikan dulu?", respon: ["🛏️ Rapikan Dulu", "🏃 Langsung Lari"] },
-    { tipe: "disiplin", teks: "Wah, sudah jam makan siang! Cuci tangan dulu atau langsung ambil sendok?", respon: ["🧼 Cuci Tangan", "🍽️ Langsung Makan"] },
-    { tipe: "disiplin", teks: "Mainan sudah selesai dipakai nih. Siapa yang harus membereskan?", respon: ["🙋 Aku Sendiri", "👵 Minta Nenek"] },
-    { tipe: "disiplin", teks: "Ada PR dari Bu Guru. Dikerjakan pulang sekolah atau nanti malam pas ngantuk?", respon: ["📝 Pulang Sekolah", "😴 Pas Ngantuk"] },
-    { tipe: "disiplin", teks: "Masuk ke rumah teman, nyelonong masuk atau ketuk pintu dulu?", respon: ["🚪 Ketuk Pintu", "🏃 Nyelonong"] },
-    { tipe: "disiplin", teks: "Sampah bekas jajan ini dibuang ke mana ya?", respon: ["🗑️ Tong Sampah", "🪟 Lempar Jendela"] },
-    { tipe: "disiplin", teks: "Kalau antri beli es krim, ada teman nyerobot. Kamu ikutan nyerobot nggak?", respon: ["⛔ Enggak Dong", "🏃 Ikut Nyerobot"] },
-    { tipe: "disiplin", teks: "Besok sekolah pagi. Malam ini tidurnya larut malam atau tepat waktu?", respon: ["⏰ Tepat Waktu", "🎮 Gadang Main HP"] },
-    { tipe: "disiplin", teks: "Lampu merah menyala! Ayah mau jalan terus, kamu bilang apa?", respon: ["🛑 Berhenti Yah!", "🚗 Gas Terus!"] },
-    { tipe: "disiplin", teks: "Mau pinjam pensil teman. Langsung ambil atau bilang 'pinjam ya'?", respon: ["🗣️ Izin Dulu", "🤏 Asal Ambil"] },
+    { tipe: "disiplin", teks: "Setelah bangun tidur, kasurnya dibiarkan berantakan atau dirapikan dulu?", respon: ["🛏️ Rapikan Dulu", "🏃 Langsung Pergi"] },
+    { tipe: "disiplin", teks: "Sudah jam makan. Cuci tangan dulu atau langsung makan?", respon: ["🧼 Cuci Tangan Dulu", "🍽️ Langsung Makan"] },
+    { tipe: "disiplin", teks: "Mainan sudah selesai dipakai. Siapa yang harus membereskan?", respon: ["🙋 Saya Sendiri", "🧸 Biarkan Saja"] },
+    { tipe: "disiplin", teks: "Kegiatan di kelas sudah dimulai. Bu Guru minta kamu duduk rapi. Kamu bagaimana?", respon: ["🧘 Duduk Rapi Sekarang", "🏃 Jalan-jalan Terus"] },
+    { tipe: "disiplin", teks: "Masuk ke rumah teman. Ketuk pintu dulu atau langsung masuk?", respon: ["🚪 Ketuk Pintu Dulu", "🏃 Langsung Masuk"] },
+    { tipe: "disiplin", teks: "Sampah bekas jajan ini dibuang ke mana?", respon: ["🗑️ Ke Tong Sampah", "📦 Taruh Sembarangan"] },
+    { tipe: "disiplin", teks: "Sedang antre beli sesuatu, ada teman nyerobot. Kamu ikut nyerobot juga?", respon: ["⛔ Tetap Antre Tertib", "🏃 Ikut Nyerobot"] },
+    { tipe: "disiplin", teks: "Besok sekolah pagi. Malam ini kamu tidur tepat waktu atau masih main sampai larut?", respon: ["⏰ Tidur Tepat Waktu", "🎲 Main Sampai Larut"] },
+    { tipe: "disiplin", teks: "Lampu merah menyala saat di jalan. Kamu melakukan apa?", respon: ["🛑 Mengingatkan untuk Berhenti", "🤐 Diam Saja"] },
+    { tipe: "disiplin", teks: "Di kelas kamu ingin bicara. Angkat tangan dulu atau bicara memotong?", respon: ["✋ Angkat Tangan Dulu", "🗣️ Bicara Memotong"] },
+    { tipe: "disiplin", teks: "Saat Bu Guru bercerita, teman mengajak ngobrol. Kamu bagaimana?", respon: ["👂 Dengarkan Bu Guru Dulu", "🗣️ Ikut Ngobrol"] },
+    { tipe: "disiplin", teks: "Bu Guru minta siapkan buku dan alat tulis. Kamu bagaimana?", respon: ["📚 Siapkan Segera", "🧩 Nanti Saja"] },
+    { tipe: "disiplin", teks: "Setelah makan, piring dan gelas kamu bagaimana?", respon: ["🍽️ Letakkan di Tempatnya", "🪑 Tinggalkan di Meja"] },
+    { tipe: "disiplin", teks: "Sepatu setelah dipakai sebaiknya bagaimana?", respon: ["👟 Taruh di Rak", "🌀 Taruh Sembarangan"] },
+    { tipe: "disiplin", teks: "Setelah selesai menggambar, Bu Guru minta simpan crayon dan kertasnya. Kamu bagaimana?", respon: ["🖍️ Simpan di Tempatnya", "🌀 Tinggalkan Berantakan"] },
+    { tipe: "disiplin", teks: "Waktu bermain sudah selesai. Kamu bagaimana?", respon: ["🧺 Berhenti dan Rapikan", "🫥 Tetap Main Diam-diam"] },
+    { tipe: "disiplin", teks: "Guru memberi aturan saat kegiatan. Kamu bagaimana?", respon: ["✅ Ikuti Aturannya", "🔄 Ubah Aturan Sendiri"] },
+    { tipe: "disiplin", teks: "Mau menyeberang jalan. Kamu pilih yang mana?", respon: ["🚸 Menyeberang di Tempat Aman", "🏃 Menyeberang Sembarangan"] },
+    { tipe: "disiplin", teks: "Bu Guru minta kamu merapikan mainan kelas setelah bermain. Kamu bagaimana?", respon: ["🧸 Rapikan Sekarang", "⏳ Nanti Saja"] },
+    { tipe: "disiplin", teks: "Sebelum berangkat sekolah, tas dan perlengkapan kamu bagaimana?", respon: ["🎒 Cek Dulu Lengkap", "🚶 Berangkat Tanpa Cek"] },
+
     // --- KATEGORI: JUJUR (💖) ---
-    { tipe: "jujur", teks: "Waduh, gelas Ibu pecah tersenggol kamu! Bilang jujur atau sembunyi?", respon: ["🥺 Bilang Maaf", "🫣 Sembunyi"] },
-    { tipe: "jujur", teks: "Eh, nemu uang jatuh di jalan. Bukan punyamu sih. Gimana dong?", respon: ["👮 Lapor Guru/Ortu", "🍬 Buat Jajan"] },
-    { tipe: "jujur", teks: "Ibu kembalian belanja kelebihan uangnya. Kamu balikin atau simpan?", respon: ["💰 Balikin ke Ibu", "🤫 Simpan Aja"] },
-    { tipe: "jujur", teks: "Nilai ulangan jelek nih. Berani kasih lihat Ayah/Ibu nggak?", respon: ["📄 Berani Dong", "🗑️ Umpetin"] },
-    { tipe: "jujur", teks: "Lagi puasa, tapi di kulkas ada sirup dingin. Minum diam-diam nggak?", respon: ["💪 Tetap Puasa", "🥤 Minum Dikit"] },
-    { tipe: "jujur", teks: "Temanmu lupa bawa bekal. Kamu mau berbagi atau makan sendiri?", respon: ["🍱 Bagi Dua", "😋 Makan Sendiri"] },
-    { tipe: "jujur", teks: "Ditanya Guru: 'Siapa yang coret-coret tembok?'. Kalau itu kamu, kamu ngaku?", respon: ["☝️ Saya Bu", "👉 Tunjuk Teman"] },
-    { tipe: "jujur", teks: "Main congklak ini seru. Kalau kalah, boleh marah-marah nggak?", respon: ["🤝 Salaman", "😡 Marah-marah"] },
-    { tipe: "jujur", teks: "Janji mau main ke rumah teman jam 4. Kamu datang jam berapa?", respon: ["🕓 Jam 4 Pas", "🕔 Jam 5 Sore"] },
-    { tipe: "jujur", teks: "Ada kue di meja makan. Boleh dimakan tanpa izin Ibu?", respon: ["🗣️ Tanya Dulu", "🍰 Makan Aja"] }
+    { tipe: "jujur", teks: "Waduh gelas Ibu pecah tersenggol kamu. Kamu bagaimana?", respon: ["🥺 Mengaku dan Minta Maaf", "🫣 Sembunyikan"] },
+    { tipe: "jujur", teks: "Kamu menemukan uang di jalan, tapi bukan punyamu. Kamu bagaimana?", respon: ["👮 Serahkan ke Guru/Ortu", "🍬 Dipakai Jajan"] },
+    { tipe: "jujur", teks: "Ibu memberi kamu 2 permen, tapi kamu menemukan ada 1 permen lagi di tas yang bukan punyamu. Kamu bagaimana?", respon: ["🍬 Kembalikan dan Bilang ke Ibu/Guru", "🤫 Simpan Saja"] },
+    { tipe: "jujur", teks: "Hasil gambar atau mewarnai kamu hari ini belum rapi. Saat ditanya Ayah/Ibu, kamu bagaimana?", respon: ["📄 Tunjukkan Apa Adanya", "🎭 Bilang Sudah Bagus"] },
+    { tipe: "jujur", teks: "Saat bermain tebak gambar, kamu belum tahu jawabannya. Kamu bagaimana?", respon: ["🙋 Bilang Belum Tahu", "🎭 Ngaku Tahu Padahal Tidak"] },
+    { tipe: "jujur", teks: "Bu Guru minta kamu menggambar sendiri. Teman minta kamu bilang gambarnya dia. Kamu bagaimana?", respon: ["🗣️ Jujur Ini Gambar Saya", "🎭 Bilang Ini Gambar Teman"] },
+    { tipe: "jujur", teks: "Mau pinjam pensil teman. Kamu bagaimana?", respon: ["🗣️ Minta Izin Dulu", "🤏 Ambil Diam-diam"] },
+    { tipe: "jujur", teks: "Kamu menemukan penghapus di kelas. Kamu bagaimana?", respon: ["🧑‍🏫 Serahkan ke Guru", "🎒 Simpan untuk Diri"] },
+    { tipe: "jujur", teks: "Kamu mencoret tembok tanpa sengaja. Saat ditanya, kamu bagaimana?", respon: ["☝️ Mengaku Jujur", "👉 Menyalahkan Teman"] },
+    { tipe: "jujur", teks: "Mainan teman rusak karena kamu. Kamu bagaimana?", respon: ["🧾 Mengaku dan Minta Maaf", "🙊 Pura-pura Tidak Tahu"] },
+    { tipe: "jujur", teks: "Kamu terlambat masuk barisan karena masih bermain. Bu Guru bertanya kenapa. Kamu bagaimana?", respon: ["🗣️ Jujur Bilang Masih Bermain", "👉 Menyalahkan Teman"] },
+    { tipe: "jujur", teks: "Uang jajan kamu masih ada, tapi kamu ingin minta lagi. Kamu bagaimana?", respon: ["🗣️ Jujur Masih Ada", "🎭 Bilang Sudah Habis"] },
+    { tipe: "jujur", teks: "Ada kue di meja. Boleh dimakan tanpa izin?", respon: ["🗣️ Tanya/Izin Dulu", "🍰 Ambil Saja"] },
+    { tipe: "jujur", teks: "Saat bermain bersama, kamu kalah. Kamu bagaimana?", respon: ["🙂 Terima Hasilnya", "🔄 Ngakali Biar Menang"] },
+    { tipe: "jujur", teks: "Kamu mendapat hadiah yang seharusnya untuk teman. Kamu bagaimana?", respon: ["🎁 Kembalikan", "🧷 Simpan Saja"] },
+    { tipe: "jujur", teks: "Ibu bertanya, “Sudah mandi belum?” Padahal kamu belum mandi. Kamu bagaimana?", respon: ["🚿 Jujur Belum Mandi", "🎭 Bilang Sudah"] },
+    { tipe: "jujur", teks: "Bu Guru keluar sebentar. Ada mainan di lemari yang dilarang diambil. Kamu bagaimana?", respon: ["🔒 Tidak Ambil dan Menunggu", "🤏 Ambil Diam-diam"] },
+    { tipe: "jujur", teks: "Kamu menumpahkan air di kelas dan tidak ada yang melihat. Kamu bagaimana?", respon: ["🧻 Bersihkan dan Mengaku", "👀 Diam Saja"] },
+    { tipe: "jujur", teks: "Bu Guru memberi kamu stiker untuk dibagikan. Ternyata ada 1 stiker lebih. Kamu bagaimana?", respon: ["🧑‍🏫 Bilang ke Bu Guru", "🧷 Simpan Diam-diam"] },
+    { tipe: "jujur", teks: "Kamu melihat barang teman jatuh dan teman tidak sadar. Kamu bagaimana?", respon: ["🧺 Ambilkan dan Beri Tahu", "🫢 Sembunyikan Biar Untung"] }
 ];
 
 // 2. REFERENSI ELEMEN HTML
